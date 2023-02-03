@@ -25,8 +25,19 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-12 col-sm-8">
-                <h1 class="h3 mb-2 text-white">Data Permohonan</h1>
-                <p class="mb-4 text-white-50">Detail lengkap data permohonan yang telah diajukan.</p>
+                <h1 class="h3 mb-2 text-white">Pengajuan Permohonan</h1>
+                <p class="mb-4 text-white-50">Silahkan isi form berikut untuk mengajukan permohonan</p>
+
+                @if (session('kode_pelayanan'))
+                <div class="card mb-4 border-left-success">
+                    <div class="card-body">
+                        <p>Pengajuan permohonan baru berhasil, berikut adalah kode pelayanan anda:</p>
+                        <h4>{{ session('kode_pelayanan') }}121313</h4>
+                        <p class="small">Simpan kode pelayanan anda untuk mendapatkan surat rekomendasi di dinas.</p>
+                    </div>
+                </div>
+                @else
+
                 <div class="card shadow mb-4">
 
                     {{-- validation alert --}}
@@ -44,11 +55,6 @@
                         <form action="{{ route('permohonan.store') }}" method="POST">
                             @csrf
                             <div class="mb-3">
-                                <div class="mb-3">
-                                    <label class="form-label">Kode Pelayanan</label>
-                                    <input type="text" class="form-control" name="kode_pelayanan"
-                                        value="{{ old('kode_pelayanan') }}" required>
-                                </div>
                                 <div class="row">
                                     <div class="col">
                                         <div class="mb-3">
@@ -133,6 +139,8 @@
                         </form>
                     </div>
                 </div>
+
+                @endif
             </div>
         </div>
 

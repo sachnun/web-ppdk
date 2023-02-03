@@ -31,9 +31,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // factory user
-        \App\Models\User::factory(10)->create();
+        // \App\Models\User::factory(10)->create();
 
         // factory permohonan
-        \App\Models\Permohonan::factory(50)->create();
+        // \App\Models\Permohonan::factory(50)->create();
     }
 }
