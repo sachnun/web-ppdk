@@ -3,6 +3,14 @@
 <h1 class="h3 mb-2 text-gray-800">Data Permohonan</h1>
 <p class="mb-4">Detail lengkap data permohonan yang telah diajukan.</p>
 
+
+{{-- error alert --}}
+@if (session('error'))
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong>Error!</strong> {{ session('error') }}
+</div>
+@endif
+
 <div class="row">
     <div class="col-12 col-sm-8">
         <div class="card shadow mb-4">
@@ -94,13 +102,17 @@
                 <div class="card-body">
                     @if ($permohonan->status == 'Tertunda')
                     <div class="row d-flex justify-content-center">
-                        <a href="#" class="btn btn-success btn-icon-split btn-lg mr-2">
+                        <a href="{{ URL::SignedRoute('permohonan.terima', $permohonan->id) }}"
+                            onclick=" return confirm('Apakah anda yakin ingin menyetujui permohonan ini?')"
+                            class=" btn btn-success btn-icon-split btn-lg mr-2">
                             <span class="icon text-white">
                                 <i class="fas fa-check"></i>
                             </span>
                             <span class="text">Setujui</span>
                         </a>
-                        <a href="#" class="btn btn-danger btn-icon-split btn-lg mr-2">
+                        <a href="{{ URL::SignedRoute('permohonan.tolak', $permohonan->id) }}"
+                            onclick="return confirm('Apakah anda yakin ingin menolak permohonan ini?')"
+                            class=" btn btn-danger btn-icon-split btn-lg mr-2">
                             <span class="icon text-white">
                                 <i class="fas fa-xmark"></i>
                             </span>
@@ -134,6 +146,25 @@
                 </div>
             </div>
         </div>
+
+        @if ($permohonan->status == 'Diterima')
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    Surat Rekomendasi
+                </h6>
+            </div>
+            <div class="card-body">
+                <a href="{{ route('permohonan.surat', $permohonan->id) }}" target="_blank"
+                    class="btn btn-primary btn-icon-split">
+                    <span class="icon text-white">
+                        <i class="fas fa-print"></i>
+                    </span>
+                    <span class="text">Print</span>
+                </a>
+            </div>
+        </div>
+        @endif
     </div>
 </div>
 @endsection

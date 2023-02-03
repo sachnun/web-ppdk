@@ -29,7 +29,7 @@ class DashboardManageUserController extends Controller
         $request->validate([
             'kode_pegawai' => 'required',
             'nama_lengkap' => 'required',
-            'username' => 'required',
+            'username' => 'required|unique:users',
             'password' => 'required',
         ]);
 
@@ -37,7 +37,7 @@ class DashboardManageUserController extends Controller
             'kode_pegawai' => $request->kode_pegawai,
             'nama_lengkap' => $request->nama_lengkap,
             'username' => $request->username,
-            'password' => $request->password,
+            'password' => bcrypt($request->password),
         ]);
 
         return redirect()->route('user.show', $user->id)->with('success', 'User berhasil ditambahkan');

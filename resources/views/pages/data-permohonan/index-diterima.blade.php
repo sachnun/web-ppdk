@@ -47,6 +47,11 @@
                                     class="btn btn-primary btn-circle btn-sm mr-2">
                                     <i class="fas fa-info"></i>
                                 </a>
+                                {{-- surat print --}}
+                                <a href="{{ route('permohonan.surat', $permohonan->id) }}" target="_blank"
+                                    class="btn btn-success btn-circle btn-sm mr-2">
+                                    <i class="fas fa-print"></i>
+                                </a>
                             </div>
                         </td>
                     </tr>

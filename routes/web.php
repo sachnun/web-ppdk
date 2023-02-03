@@ -27,62 +27,78 @@ Route::get('/permohonan', function () {
 })->name('permohonan.form');
 
 Route::prefix('dashboard')->group(function () {
-    // login
-    Route::get('/login', [DashboardController::class, 'login'])->name('login');
 
-    // auth
-    Route::post('/auth', [DashboardController::class, 'authenticate'])->name('auth');
+    // only guest
+    Route::middleware(['guest'])->group(function () {
+        // login
+        Route::get('/login', [DashboardController::class, 'login'])->name('login');
 
-    Route::get(
-        '/',
-        [DashboardController::class, 'index']
-    )->name('dashboard');
+        // auth
+        Route::post('/auth', [DashboardController::class, 'authenticate'])->name('auth');
+    });
 
-    Route::get(
-        '/permohonan',
-        [DashboardPermohonanController::class, 'index']
-    )->name('permohonan');
+    // only login
+    Route::middleware(['auth'])->group(function () {
 
-    Route::get(
-        '/permohonan/data/{id}',
-        [DashboardDataPermohonanController::class, 'show']
-    )->name('permohonan.show');
+        // logout
+        Route::get('/logout', [DashboardController::class, 'logout'])->name('logout');
 
-    // tertunda route
-    Route::get(
-        '/permohonan/tertunda',
-        [DashboardDataPermohonanController::class, 'indexTertunda']
-    )->name('permohonan-tertunda');
+        Route::get(
+            '/',
+            [DashboardController::class, 'index']
+        )->name('dashboard');
 
-    // diterima route
-    Route::get(
-        '/permohonan/diterima',
-        [DashboardDataPermohonanController::class, 'indexDiterima']
-    )->name('permohonan-diterima');
+        Route::get(
+            '/permohonan',
+            [DashboardPermohonanController::class, 'index']
+        )->name('permohonan');
 
-    // ditolak route
-    Route::get(
-        '/permohonan/ditolak',
-        [DashboardDataPermohonanController::class, 'indexDitolak']
-    )->name('permohonan-ditolak');
+        Route::get(
+            '/permohonan/data/{id}',
+            [DashboardDataPermohonanController::class, 'show']
+        )->name('permohonan.show');
 
-    // aksi ditolak with secure url
-    Route::get(
-        '/permohonan/data/{id}/tolak',
-        [DashboardPermohonanController::class, 'ditolak']
-    )->name('permohonan.tolak')->middleware('signed');
+        // tertunda route
+        Route::get(
+            '/permohonan/tertunda',
+            [DashboardDataPermohonanController::class, 'indexTertunda']
+        )->name('permohonan-tertunda');
 
-    // aksi diterima with secure url
-    Route::get(
-        '/permohonan/data/{id}/terima',
-        [DashboardPermohonanController::class, 'diterima']
-    )->name('permohonan.terima')->middleware('signed');
+        // diterima route
+        Route::get(
+            '/permohonan/diterima',
+            [DashboardDataPermohonanController::class, 'indexDiterima']
+        )->name('permohonan-diterima');
 
-    // resouces route user
-    Route::resource('user', DashboardManageUserController::class)->only([
-        'index', 'create', 'store', 'destroy', 'show'
-    ]);
+        // ditolak route
+        Route::get(
+            '/permohonan/ditolak',
+            [DashboardDataPermohonanController::class, 'indexDitolak']
+        )->name('permohonan-ditolak');
 
+        // aksi ditolak with secure url
+        Route::get(
+            '/permohonan/data/{id}/tolak',
+            [DashboardPermohonanController::class, 'ditolak']
+        )->name('permohonan.tolak')->middleware('signed');
+
+        // aksi diterima with secure url
+        Route::get(
+            '/permohonan/data/{id}/terima',
+            [DashboardPermohonanController::class, 'diterima']
+        )->name('permohonan.terima')->middleware('signed');
+
+        // resouces route user
+        Route::resource('user', DashboardManageUserController::class)->only([
+            'index', 'create', 'store', 'destroy', 'show'
+        ]);
+
+        // open surat permohonan
+        Route::get(
+            '/permohonan/data/{id}/surat',
+            [DashboardDataPermohonanController::class, 'surat']
+        )->name('permohonan.surat');
+    });
 
     // store permohonan
     Route::post(

@@ -21,7 +21,7 @@ class UserFactory extends Factory
             "kode_pegawai" => $this->faker->unique()->randomNumber(5),
             "nama_lengkap" => $this->faker->name,
             "username" => $this->faker->unique()->userName,
-            "password" => "123",
+            "password" => bcrypt('123'),
             "role" => "pegawai"
         ];
     }

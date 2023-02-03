@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             "kode_pegawai" => "12345",
             "nama_lengkap" => "Administrator",
             "username" => "admin",
-            "password" => "123",
+            "password" => bcrypt('123'),
             "role" => "admin"
         ]);
 

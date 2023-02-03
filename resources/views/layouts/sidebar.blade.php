@@ -67,6 +67,9 @@ $detail = Request::is('dashboard/permohonan/data/*') ? 'active' : '';
 <!-- Divider -->
 <hr class="sidebar-divider">
 
+{{-- only role admin --}}
+@if (Auth::user()->role == 'admin')
+
 <!-- Heading -->
 <div class="sidebar-heading">
     Admin Panel
@@ -83,6 +86,8 @@ $detail = Request::is('dashboard/permohonan/data/*') ? 'active' : '';
 
 <!-- Divider -->
 <hr class="sidebar-divider d-none d-md-block">
+
+@endif
 
 <!-- Sidebar Toggler (Sidebar) -->
 <div class="text-center d-none d-md-inline">

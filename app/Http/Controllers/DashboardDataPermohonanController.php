@@ -45,4 +45,19 @@ class DashboardDataPermohonanController extends Controller
             'permohonans' => $permohonans,
         ]);
     }
+
+    // surat permohonan
+    public function surat($id)
+    {
+        $permohonan = Permohonan::findOrFail($id);
+
+        // check status
+        if ($permohonan->status != 'Diterima') {
+            return redirect()->route('permohonan.show', $permohonan->id)->with('error', 'Surat permohonan hanya dapat diunduh jika permohonan telah diterima.');
+        }
+
+        return view('surat', [
+            'permohonan' => $permohonan,
+        ]);
+    }
 }

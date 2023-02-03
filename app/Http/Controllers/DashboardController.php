@@ -29,9 +29,20 @@ class DashboardController extends Controller
         }
 
         return back()->withErrors([
-            'username' => 'Username salah',
-            'password' => 'Password salah',
+            'username' => 'Username atau password salah',
         ])->onlyInput('username');
+    }
+
+    // logout
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
     }
 
     // index
