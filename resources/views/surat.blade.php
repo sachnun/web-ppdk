@@ -21,12 +21,12 @@
         <hr class="border border-dark border-2 opacity-100">
         <!-- tanggal -->
         <div class="row text-end">
-            <span>Cibeber, 20 Januari 2023</span>
+            <span>Cibeber, {{ date("d-m-Y") }}</span>
         </div>
         <div class="row ">
             <!-- nomor surat & perihal -->
             <div class=" col "><span>Nomorㅤㅤㅤ: 400/Sekrt. <br>Sifatㅤㅤㅤㅤ : Biasa<br>Lampiranㅤㅤ: -<br>perihalㅤㅤㅤ :
-                    <b>Rekomendasi ijin blabla</b></span></div>
+                    <b>Rekomendasi ijin {{ $permohonan->jenis_pelayanan }}</b></span></div>
 
             <!-- kepada yth -->
             <div class=" col "></div>
@@ -51,23 +51,27 @@
         <div class="row  mt-2">
             <div class=" col-1"></div>
             <div class=" col">
-                <p>Menindaklanjuti Permohonan ijin Praktek Bidan :</p>
+                <p>Menindaklanjuti Permohonan {{ $permohonan->jenis_pelayanan }} :</p>
             </div>
             <div class="col-1"></div>
         </div>
         <!-- data pemohon -->
         <div class="row ">
             <div class=" col-1"></div>
-            <div class=" col">Namaㅤㅤㅤㅤㅤㅤ: mba dini<br>Tempat/Tgl lahir ㅤ : Rahim, 9 oktober 1982<br>Lulusanㅤㅤㅤㅤㅤ : Bikin
-                Bottom Driving Academy<br>Alamat Rumahㅤㅤ: jjjjjjjjjjjjjjjjjjjj<br>Alamat Kerjaㅤㅤㅤ: Labbaik Ciruas</div>
+            <div class=" col">Namaㅤㅤㅤㅤㅤㅤ: {{ $permohonan->nama_lengkap }}<br>Tempat/Tgl lahir ㅤ : {{
+                $permohonan->tempat_lahir }}, {{ $permohonan->tanggal_lahir }}<br>Lulusanㅤㅤㅤㅤㅤ : {{
+                $permohonan->lulusan }}<br>Alamat Rumahㅤㅤ: {{ $permohonan->alamat_rumah }}<br>Alamat Kerjaㅤㅤㅤ: {{
+                $permohonan->tempat_bekerja_sebelumnya }}
+            </div>
             <div class=" col-1"></div>
         </div>
         <!-- ada jenis pelayan coy -->
         <div class="row  mt-1">
             <div class=" col-1"></div>
             <div class=" col">
-                <p>pada dasarnya tidak keberatan untuk memberikan <b> Persetujuan Rekomendasi Atasan untuk ijin Praktek
-                        Bidan</b> di wilayah kerja Puskesmas Cibeber Kota Cilegon, selama tidak melanggar peraturan yang
+                <p>pada dasarnya tidak keberatan untuk memberikan <b> Persetujuan Rekomendasi Atasan untuk ijin {{
+                        $permohonan->jenis_pelayanan }}</b> di wilayah kerja Puskesmas Cibeber Kota Cilegon, selama
+                    tidak melanggar peraturan yang
                     berlaku</p>
             </div>
             <div class=" col-1"></div>
