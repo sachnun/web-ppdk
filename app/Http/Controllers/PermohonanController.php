@@ -8,6 +8,6 @@ class PermohonanController extends Controller
 {
     public function store(Request $request)
     {
-        // 
+        ddd($request->all());
     }
 }

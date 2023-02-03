@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardPermohonanController;
 use App\Http\Controllers\DashboardDataPermohonanController;
 use App\Http\Controllers\DashboardManageUserController;
+use App\Http\Controllers\PermohonanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,13 @@ use App\Http\Controllers\DashboardManageUserController;
 |
 */
 
+Route::get('/', function () {
+    return view('landing');
+});
+
 Route::get('/permohonan', function () {
     return view('permohonan');
-});
+})->name('permohonan.form');
 
 Route::prefix('dashboard')->group(function () {
     // login
@@ -77,4 +82,11 @@ Route::prefix('dashboard')->group(function () {
     Route::resource('user', DashboardManageUserController::class)->only([
         'index', 'create', 'store', 'destroy', 'show'
     ]);
+
+
+    // store permohonan
+    Route::post(
+        '/permohonan/store',
+        [PermohonanController::class, 'store']
+    )->name('permohonan.store');
 });

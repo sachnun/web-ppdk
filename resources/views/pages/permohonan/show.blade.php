@@ -55,6 +55,10 @@
                     </div>
                 </div>
                 <div class="mb-3">
+                    <label class="form-label">Jenis Kelamin</label>
+                    <input type="text" class="form-control bg-white" readonly value="{{ $permohonan->jenis_kelamin }}">
+                </div>
+                <div class="mb-3">
                     <label class="form-label">Lulusan</label>
                     <input type="date" class="form-control bg-white" readonly value="{{ $permohonan->lulusan }}">
                 </div>
